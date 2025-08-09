@@ -1,0 +1,42 @@
+name: Auto Deploy to EC2 with Backup & WhatsApp
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "📦 Creating backup..."
+            mkdir -p ~/site-backups
+            timestamp=$(date +"%Y-%m-%d-%H%M")
+            sudo tar -czf ~/site-backups/backup-$timestamp.tar.gz /var/www/md.masiuddin.info
+
+            echo "🔁 Updating site..."
+            cd /var/www/md.masiuddin.info
+            git fetch --all
+            git reset --hard origin/main
+
+            echo "🔄 Reloading Nginx..."
+            sudo systemctl reload nginx
+
+      - name: WhatsApp Alert via Twilio
+        if: always()
+        run: |
+          curl -X POST https://api.twilio.com/2010-04-01/Accounts/${{ secrets.TWILIO_ACCOUNT_SID }}/Messages.json \
+          --data-urlencode "From=${{ secrets.TWILIO_FROM }}" \
+          --data-urlencode "To=${{ secrets.TWILIO_TO }}" \
+          --data-urlencode "Body=🚀 Deploy Status: ${{ job.status }}%0A🕒 Time: $(date -u '+%Y-%m-%d %H:%M:%S') UTC%0A💻 Site: https://md.masiuddin.info" \
+          -u ${{ secrets.TWILIO_ACCOUNT_SID }}:${{ secrets.TWILIO_AUTH_TOKEN }}
