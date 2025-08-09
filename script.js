@@ -140,7 +140,7 @@ function handleFormSubmission() {
     const message = formData.get('message');
     
     // Create mailto link with form data
-    const mailtoLink = `mailto:k.shamsuddin.a@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    const mailtoLink = `mailto:k.Mohammed.a@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
     
     // Open email client
     window.location.href = mailtoLink;
@@ -155,8 +155,8 @@ function handleFormSubmission() {
 // Download resume functionality
 function downloadResume() {
     const a = document.createElement('a');
-    a.href = 'assets/Khaja_Shamsuddin_Ahmed_DevOps_Resume.pdf'; // path to your actual PDF resume
-    a.download = 'Khaja_Shamsuddin_Ahmed_DevOps_Resume.pdf';
+    a.href = 'assets/Masiuddin_Mohammed_Ahmed_DevOps_Resume.pdf'; // path to your actual PDF resume
+    a.download = 'Masiuddin_Mohammed_Ahmed_DevOps_Resume.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -173,8 +173,8 @@ Cloud & DevOps Engineer
 Email: mdmasiuddin55@gmail.com
 Phone: +91 7674833218
 Location: Hyderabad, India
-LinkedIn: https://www.linkedin.com/in/khaja-shamsuddin-ahmed
-GitHub: https://github.com/k-shamsuddin/
+LinkedIn: https://www.linkedin.com/in/Masiuddin-Mohammed-ahmed
+GitHub: https://github.com/k-Mohammed/
 
 OBJECTIVE
 To secure a challenging position as a DevOps Engineer where I can utilize my skills in cloud computing, automation, and continuous delivery.
