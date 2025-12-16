@@ -155,7 +155,7 @@ function handleFormSubmission() {
 // Download resume functionality
 function downloadResume() {
     const a = document.createElement('a');
-    a.href = 'assets/Masiuddin_resume.pdf'; // path to your actual PDF resume
+    a.href = 'Masiuddin_resume.pdf'; // relative path to your PDF; change to e.g. 'assets/Masiuddin_resume.pdf' or an absolute URL if needed
     a.download = 'Masiuddin_resume.pdf';
     document.body.appendChild(a);
     a.click();
