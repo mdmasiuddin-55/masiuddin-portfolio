@@ -140,7 +140,7 @@ function handleFormSubmission() {
     const message = formData.get('message');
     
     // Create mailto link with form data
-    const mailtoLink = `mailto:k.Mohammed.a@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    const mailtoLink = `mailto:mdmasiuddin55@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
     
     // Open email client
     window.location.href = mailtoLink;
@@ -155,8 +155,8 @@ function handleFormSubmission() {
 // Download resume functionality
 function downloadResume() {
     const a = document.createElement('a');
-    a.href = 'assets/Masiuddin_Mohammed_Ahmed_DevOps_Resume.pdf'; // path to your actual PDF resume
-    a.download = 'Masiuddin_Mohammed_Ahmed_DevOps_Resume.pdf';
+    a.href = 'assets/Masiuddin_resume.pdf'; // path to your actual PDF resume
+    a.download = 'Masiuddin_resume.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
