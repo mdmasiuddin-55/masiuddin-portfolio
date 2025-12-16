@@ -154,14 +154,29 @@ function handleFormSubmission() {
 
 // Download resume functionality
 function downloadResume() {
-    const a = document.createElement('a');
-    a.href = 'Masiuddin_resume.pdf'; // relative path to your PDF; change to e.g. 'assets/Masiuddin_resume.pdf' or an absolute URL if needed
-    a.download = 'Masiuddin_resume.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const resumeUrl = './assets/Masiuddin_resume.pdf';
 
-    showNotification('Resume downloaded successfully!', 'success');
+    // Check the file exists before triggering download to avoid misleading success message
+    fetch(resumeUrl, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                const a = document.createElement('a');
+                a.href = resumeUrl;
+                a.download = 'Masiuddin_resume.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                showNotification('Resume download started.', 'success');
+            } else {
+                console.warn('Resume not found:', response.status);
+                showNotification('Resume file not found (404).', 'error');
+            }
+        })
+        .catch(err => {
+            console.error('Error checking resume file:', err);
+            showNotification('Failed to download resume. Please try again later.', 'error');
+        });
 }
 
 
